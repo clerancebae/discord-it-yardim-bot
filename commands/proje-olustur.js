@@ -15,24 +15,24 @@ module.exports = {
     try {
         if(interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)){
             const text = interaction.options.getString("projectname");
-           const categorycik = await interaction.guild.channels.create({name: `${text}`, type: ChannelType.GuildCategory });
+           const category = await interaction.guild.channels.create({name: `${text}`, type: ChannelType.GuildCategory });
             await interaction.reply({content: `Created **${text}** category!`, ephemeral: true});
             interaction.guild.roles.create({name:`${text}-backend-lead`, permissions: [PermissionsBitField.Flags.ViewChannel]})
             interaction.guild.roles.create({name:`${text}-front-end-lead`, permissions: [PermissionsBitField.Flags.ViewChannel]})
             interaction.guild.roles.create({name:`${text}-pm`, permissions: [PermissionsBitField.Flags.ViewChannel]})
-            let berke = await interaction.guild.roles.cache.find(x => x.name == `${text}-backend-lead`);
-            let berke2 = await interaction.guild.roles.cache.find(x => x.name == `${text}-front-end-lead`);
-            let berke3 = await interaction.guild.roles.cache.find(x => x.name == `${text}-pm`);
+            let roles1 = await interaction.guild.roles.cache.find(x => x.name == `${text}-backend-lead`);
+            let roles2 = await interaction.guild.roles.cache.find(x => x.name == `${text}-front-end-lead`);
+            let roles3 = await interaction.guild.roles.cache.find(x => x.name == `${text}-pm`);
             interaction.guild.channels.create({name: `${text}`,
              type: ChannelType.GuildText,
-              parent: categorycik,
+              parent: category,
               });
             interaction.guild.channels.create({name: `${text}`,
              type: ChannelType.GuildVoice,
-              parent: categorycik,
+              parent: category,
               });
         }else { 
-            await interaction.reply("yapamazsin.")
+            await interaction.reply("You can't do it.")
         }
     
     } catch (err) {
